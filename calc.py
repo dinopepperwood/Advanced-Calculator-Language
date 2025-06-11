@@ -112,7 +112,7 @@ if value:
     data.append(float(value))
 while j < len(data):
     if data[j] == "+":
-        if len(data) < j and data[j+2] == "[":
+        if len(data) > 3 and data[j+2] == "[":
             num = float(data[j+3]) ** (1/float(data[j+1]))
             result = float(data[j-1]) + num
             data.pop(j+4)
@@ -121,7 +121,7 @@ while j < len(data):
             data.pop(j+1)
             data.pop(j)
             data.pop(j-1)
-        elif len(data) < 2 and data[j+1] == "L":
+        elif len(data) > 2 and data[j+1] == "L":
             num = math.log(float(data[j+3]),float(data[j+2]))
             result = float(data[j-1]) + num
             data.pop(j+3)
@@ -137,7 +137,7 @@ while j < len(data):
         data.insert(0,result)
         j = 0
     elif data[j] == "-":
-        if len(data) < j and data[j+2] == "[":
+        if len(data) > 3 and data[j+2] == "[":
             num = float(data[j+3]) ** (1/float(data[j+1]))
             result = float(data[j-1]) - num
             data.pop(j+4)
@@ -146,7 +146,7 @@ while j < len(data):
             data.pop(j+1)
             data.pop(j)
             data.pop(j-1)
-        elif len(data) < j and data[j+1] == "L":
+        elif len(data) > 2 and data[j+1] == "L":
             num = math.log(float(data[j+3]),float(data[j+2]))
             result = float(data[j-1]) - num
             data.pop(j+3)
@@ -162,7 +162,7 @@ while j < len(data):
         data.insert(0,result)
         j = 0
     elif data[j] == "*":
-        if len(data) < j and data[j+2] == "[":
+        if len(data) > 3 and data[j+2] == "[":
             num = float(data[j+3]) ** (1/float(data[j+1]))
             result = float(data[j-1]) * num
             data.pop(j+4)
@@ -171,7 +171,7 @@ while j < len(data):
             data.pop(j+1)
             data.pop(j)
             data.pop(j-1)
-        elif len(data) < j and data[j+1] == "L":
+        elif len(data) > 2 and data[j+1] == "L":
             num = math.log(float(data[j+3]),float(data[j+2]))
             result = float(data[j-1]) * num
             data.pop(j+3)
@@ -187,7 +187,7 @@ while j < len(data):
         data.insert(0,result)
         j = 0
     elif data[j] == "/":
-        if len(data) < j and data[j+2] == "[":
+        if len(data) > 3 and data[j+2] == "[":
             num = float(data[j+3]) ** (1/float(data[j+1]))
             result = float(data[j-1]) / num
             data.pop(j+4)
@@ -196,7 +196,7 @@ while j < len(data):
             data.pop(j+1)
             data.pop(j)
             data.pop(j-1)
-        elif len(data) < j and data[j+1] == "L":
+        elif len(data) > 2 and data[j+1] == "L":
             num = math.log(float(data[j+3]),float(data[j+2]))
             result = float(data[j-1]) / num
             data.pop(j+3)
@@ -212,7 +212,7 @@ while j < len(data):
         data.insert(0,result)
         j = 0
     elif data[j] == "^":
-        if len(data) < j and data[j+2] == "[":
+        if len(data) > 3 and data[j+2] == "[":
             num = float(data[j+3]) ** (1/float(data[j+1]))
             result = float(data[j-1]) ** num
             data.pop(j+4)
@@ -221,7 +221,7 @@ while j < len(data):
             data.pop(j+1)
             data.pop(j)
             data.pop(j-1)
-        elif len(data) < j and data[j+1] == "L":
+        elif len(data) > 2 and data[j+1] == "L":
             num = math.log(float(data[j+3]),float(data[j+2]))
             result = float(data[j-1]) ^ num
             data.pop(j+3)
@@ -237,7 +237,7 @@ while j < len(data):
         data.insert(0,result)
         j = 0
     elif data[j] == "%":
-        if len(data) < j and data[j+2] == "[":
+        if len(data) > 3 and data[j+2] == "[":
             num = float(data[j+3]) ** (1/float(data[j+1]))
             result = float(data[j-1]) % num
             data.pop(j+4)
@@ -246,7 +246,7 @@ while j < len(data):
             data.pop(j+1)
             data.pop(j)
             data.pop(j-1)
-        elif len(data) < j and data[j+1] == "L":
+        elif len(data) > 2 and data[j+1] == "L":
             num = math.log(float(data[j+3]),float(data[j+2]))
             result = float(data[j-1]) % num
             data.pop(j+3)
