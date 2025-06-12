@@ -31,3 +31,14 @@ VC1: prints Vector 1
 VC2: prints Vector 2
 VT1: Transposes Vector 1
 VT2: Transposes Vector 2
+M1:First Number is row and second number is column do M1 3,3, rest of numbers are value and use ; to end
+M2:M1 but for Matrix 2
+MC1:prints matrix 1
+MC2:prints matrix 2
+MT1:Transposes matrix 1
+MT2:Transposes matrix 2
+MD1:Finds determinant of matrix 1
+MD2:Finds determinant of matrix 2
+
+Calculus:
+lim: lim 1^2 1 is x and 2 is power this is a basic limit

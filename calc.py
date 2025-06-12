@@ -1,10 +1,12 @@
-#Math
+import numpy as np
 import math
 i = 0
 data = []
 command = input()
 value = ""
 j = 0
+matrix1 = []
+matrix2 = []
 total = 0
 vector1 = [0,0]
 vector2 = [0,0]
@@ -36,6 +38,42 @@ while i < len(command):
     elif command[i] == "&":
         new = "-"+value
         value = new
+    elif command[i] == "l" and command[i+1] == "i" and command[i+2] == "m":
+        data.append("lim")
+        i+=2
+    elif command[i] == "M" and command[i+1] == "D" and command[i+2] == "1":
+        data.append("MD1")
+        i+=2
+    elif command[i] == "M" and command[i+1] == "D" and command[i+2] == "2":
+        data.append("MD2")
+        i+=2
+    elif command[i] == "M" and command[i+1] == "T" and command[i+2] == "1":
+        data.append("MT1")
+        i+=2
+    elif command[i] == "M" and command[i+1] == "T" and command[i+2] == "2":
+        data.append("MT2")
+        i+=2
+    elif command[i] == "M" and command[i+1] == "M":
+        data.append("MM")
+        i+=1
+    elif command[i] == "M" and command[i+1] == "C" and command[i+2] == "1":
+        if value != "":
+            data.append(value)
+        data.append("MC1")
+        value = ""
+        i+=2
+    elif command[i] == "M" and command[i+1] == "C" and command[i+2] == "2":
+        if value != "":
+            data.append(value)
+        data.append("MC2")
+        value = ""
+        i+=2
+    elif command[i] == "M" and command[i+1] == "1":
+        data.append("M1")
+        i+=1
+    elif command[i] == "M" and command[i+1] == "2":
+        data.append("M2")
+        i+=1
     elif command[i] == "V" and command[i+1] == "D" and command[i+2] == "P":
         data.append("VDP")
         i+=2
@@ -110,6 +148,7 @@ while i < len(command):
     i += 1
 if value:
     data.append(float(value))
+j = 0
 while j < len(data):
     if data[j] == "+":
         if len(data) > 3 and data[j+2] == "[":
@@ -314,12 +353,81 @@ while j < len(data):
         data.pop(j)
         data.insert(0,total)
         j = 0
+    elif data[j] == "lim":
+        oldx = float(data[j+1])
+        x = oldx+0.01
+        val = 0
+        if data[j+2] == "^":
+            val = (x**float(data[j+3]))-oldx
+            stuff = val/(x-oldx)
+            print(round(stuff))
+        data.pop(j)
+        j = 0
+
     elif data[j] == "L":
         result = math.log(float(data[j+2]),float(data[j+1]))
         data.pop(j+2)
         data.pop(j+1)
         data.pop(j)
         data.insert(0,result)
+        j = 0
+    elif data[j] == "MD1":
+        print(np.linalg.det(matrix1))
+        data.pop(j)
+        j = 0
+    elif data[j] == "MD2":
+        print(np.linalg.det(matrix2))
+        data.pop(j)
+        j = 0
+    elif data[j] == "MT1":
+        print(matrix1.transpose())
+        data.pop(j)
+        j = 0
+    elif data[j] == "MT2":
+        print(matrix2.transpose())
+        data.pop(j)
+        j = 0
+    elif data[j] == "MM":
+        print(np.multiply(matrix1,matrix2))
+        data.pop(j)
+        j = 0
+    elif data[j] == "M1":
+        matrix1.clear()
+        rows = int(data[j+1])
+        columns = int(data[j+2])
+        stuff = []
+        while j < len(data) and data[j] != ";":
+            if data[j] != "M1":
+                stuff.append(float(data[j]))
+            data.pop(j)
+        stuff.pop(1)
+        stuff.pop(0)
+        j = 0
+        data.pop(j)
+        matrix1 = np.array(stuff).reshape(rows,columns)
+        j = 0
+    elif data[j] == "M2":
+        matrix2.clear()
+        rows = int(data[j+1])
+        columns = int(data[j+2])
+        stuff = []
+        while j < len(data) and data[j] != ";":
+            if data[j] != "M2":
+                stuff.append(float(data[j]))
+            data.pop(j)
+        stuff.pop(1)
+        stuff.pop(0)
+        j = 0
+        data.pop(j)
+        matrix2 = np.array(stuff).reshape(rows,columns)
+        j = 0
+    elif data[j] == "MC1":
+        print(matrix1)
+        data.pop(j)
+        j = 0
+    elif data[j] == "MC2":
+        print(matrix2)
+        data.pop(j)
         j = 0
     elif data[j] == "VDP":
         result = (vector1[0] * vector2[0]) + (vector1[1] * vector2[1])
